@@ -1,23 +1,60 @@
-
-import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_iris
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
-data = {
-    'Maths': [80, 90, 70, 85, 95],
-    'Science': [85, 95, 75, 80, 90],
-    'English': [78, 88, 65, 82, 92]
-}
-df = pd.DataFrame(data)
-print("Original Dataset:")
-print(df)
-scaler = StandardScaler()
-scaled_data = scaler.fit_transform(df)
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+
+# Load dataset
+iris = load_iris()
+X = iris.data
+y = iris.target
+
+# Standardize data
+X_scaled = StandardScaler().fit_transform(X)
+
+# Apply PCA
 pca = PCA(n_components=2)
-pca_data = pca.fit_transform(scaled_data)
-result = pd.DataFrame(pca_data, columns=['PC1', 'PC2'])
-print("\nDataset After PCA:")
-print(result.round(3))
+X_pca = pca.fit_transform(X_scaled)
+
+print("Original shape:", X.shape)
+print("PCA shape:", X_pca.shape)
 print("\nExplained Variance Ratio:")
-print(pca.explained_variance_ratio_.round(3))
-print("\nTotal Variance Explained:")
-print(round(sum(pca.explained_variance_ratio_), 3))
+print(pca.explained_variance_ratio_)
+
+# Apply LDA
+lda = LinearDiscriminantAnalysis(n_components=2)
+X_lda = lda.fit_transform(X_scaled, y)
+
+print("\nLDA shape:", X_lda.shape)
+
+# Plot PCA and LDA
+plt.figure(figsize=(12, 5))
+
+# PCA Plot
+plt.subplot(1, 2, 1)
+for i in range(3):
+    plt.scatter(
+        X_pca[y == i, 0],
+        X_pca[y == i, 1],
+        label=iris.target_names[i]
+    )
+plt.xlabel("Principal Component 1")
+plt.ylabel("Principal Component 2")
+plt.title("PCA on Iris Dataset")
+plt.legend()
+
+# LDA Plot
+plt.subplot(1, 2, 2)
+for i in range(3):
+    plt.scatter(
+        X_lda[y == i, 0],
+        X_lda[y == i, 1],
+        label=iris.target_names[i]
+    )
+plt.xlabel("LD1")
+plt.ylabel("LD2")
+plt.title("LDA on Iris Dataset")
+plt.legend()
+
+plt.tight_layout()
+plt.show()

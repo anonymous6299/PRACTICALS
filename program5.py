@@ -1,32 +1,28 @@
-
-import pandas as pd
-import matplotlib.pyplot as plt
-data = {
-    'Month': ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
-    'Sales': [120, 150, 100, 180, 200],
-    'Profit': [20, 30, 15, 40, 50]
-}
-df = pd.DataFrame(data)
-df.to_csv('sales_data.csv', index=False)
-print("Data Stored Successfully")
-print("\nSales Data:")
-print(df)
-print("\nStatistical Analysis:")
-print(df.describe())
-print("\nTotal Sales:", df['Sales'].sum())
-print("Average Sales:", df['Sales'].mean())
-print("Total Profit:", df['Profit'].sum())
-plt.figure(figsize=(8, 5))
-plt.bar(df['Month'], df['Sales'])
-plt.title('Monthly Sales Analysis')
-plt.xlabel('Month')
-plt.ylabel('Sales')
-plt.grid(axis='y')
-plt.show()
-plt.figure(figsize=(8, 5))
-plt.plot(df['Month'], df['Profit'], marker='o')
-plt.title('Monthly Profit Analysis')
-plt.xlabel('Month')
-plt.ylabel('Profit')
-plt.grid(True)
-plt.show()
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score, confusion_matrix
+# Load Iris dataset
+iris = load_iris()
+X = iris.data
+y = iris.target
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(
+ X, y, test_size=0.2, random_state=42
+)
+# Create KNN model
+k = 5
+model = KNeighborsClassifier(n_neighbors=k)
+# Train
+model.fit(X_train, y_train)
+# Prediction
+y_pred = model.predict(X_test)
+print("K =", k)
+print("\nActual values:")
+print(y_test)
+print("\nPredicted values:")
+print(y_pred)
+print("\nAccuracy:",
+ accuracy_score(y_test, y_pred))
+print("\nConfusion Matrix:")
+print(confusion_matrix(y_test, y_pred))

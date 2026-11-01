@@ -1,25 +1,23 @@
+import numpy as np
 import pandas as pd
+# NumPy array
+arr = np.array([10, 20, 30, 40, 50])
+print("NumPy Array:")
+print(arr)
+print("\nSum =", np.sum(arr))
+print("Mean =", np.mean(arr))
+print("Maximum =", np.max(arr))
+print("Minimum =", np.min(arr))
+# Pandas DataFrame
 data = {
-    'Name': ['Amit', 'Neha', 'Raj', 'Priya', 'Karan'],
-    'Age': [21, 22, 20, 23, 21],
-    'Marks': [85, 90, 78, 95, 88]
+ "Name": ["Aman", "Riya", "Rahul", "Neha"],
+ "Marks": [85, 92, 78, 88],
+ "Age": [20, 21, 20, 22]
 }
 df = pd.DataFrame(data)
-print("Original Data:")
+print("\nPandas DataFrame:")
 print(df)
-print("\nFirst 3 Rows:")
-print(df.head(3))
-print("\nStatistical Description:")
+print("\nFirst two rows:")
+print(df.head(2))
+print("\nStatistical Summary:")
 print(df.describe())
-print("\nColumn Names:")
-print(df.columns)
-print("\nShape of Data:")
-print(df.shape)
-print("\nViewing Marks Column:")
-print(df['Marks'])
-df['Marks'] = df['Marks'] + 5
-print("\nUpdated Data:")
-print(df)
-df = df[df['Age'] > 21]
-print("\nStudents Older Than 21:")
-print(df)

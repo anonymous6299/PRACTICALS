@@ -1,38 +1,26 @@
-
-import pandas as pd
-import matplotlib.pyplot as plt
-data = {
-    'Name': ['Amit', 'Neha', 'Raj', 'Priya', 'Karan'],
-    'Marks': [85, 90, 78, 95, 88],
-    'Age': [21, 22, 20, 23, 21]
-}
-df = pd.DataFrame(data)
-print("Dataset:")
-print(df)
-print("\nDescriptive Statistics:")
-print(df.describe())
-print("\nMean Marks:", df['Marks'].mean())
-print("Median Marks:", df['Marks'].median())
-print("Mode Marks:", df['Marks'].mode()[0])
-print("Standard Deviation:", round(df['Marks'].std(), 2))
-print("Variance:", round(df['Marks'].var(), 2))
-print("Minimum Marks:", df['Marks'].min())
-print("Maximum Marks:", df['Marks'].max())
-plt.figure(figsize=(8, 5))
-plt.bar(df['Name'], df['Marks'])
-plt.title('Student Marks')
-plt.xlabel('Student')
-plt.ylabel('Marks')
-plt.grid(axis='y')
-plt.show()
-plt.figure(figsize=(8, 5))
-plt.hist(df['Marks'], bins=5, edgecolor='black')
-plt.title('Distribution of Marks')
-plt.xlabel('Marks')
-plt.ylabel('Frequency')
-plt.show()
-plt.figure(figsize=(6, 5))
-plt.boxplot(df['Marks'])
-plt.title('Box Plot of Marks')
-plt.ylabel('Marks')
-plt.show()
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import accuracy_score, confusion_matrix
+# Load dataset
+iris = load_iris()
+X = iris.data
+y = iris.target
+# Split dataset
+X_train, X_test, y_train, y_test = train_test_split(
+ X, y, test_size=0.2, random_state=42
+)
+# Create Gaussian Naive Bayes model
+model = GaussianNB()
+# Train
+model.fit(X_train, y_train)
+# Prediction
+y_pred = model.predict(X_test)
+print("Actual values:")
+print(y_test)
+print("\nPredicted values:")
+print(y_pred)
+print("\nAccuracy:",
+ accuracy_score(y_test, y_pred))
+print("\nConfusion Matrix:")
+print(confusion_matrix(y_test, y_pred))

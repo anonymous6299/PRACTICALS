@@ -1,25 +1,38 @@
-
-import numpy as np
-import pandas as pd
-data = [10, 20, 30, 40, 50]
-arr = np.array(data)
-print("NumPy Array:")
-print(arr)
-print("Mean:", np.mean(arr))
-print("Maximum:", np.max(arr))
-print("Minimum:", np.min(arr))
-print("Sum:", np.sum(arr))
-student_data = {
-    'Name': ['Amit', 'Neha', 'Raj', 'Priya'],
-    'Age': [21, 22, 20, 23],
-    'Marks': [85, 90, 78, 95]
-}
-df = pd.DataFrame(student_data)
-print("\nDataFrame:")
-print(df)
-print("\nData Description:")
-print(df.describe())
-print("\nStudents Scoring Above 85:")
-print(df[df['Marks'] > 85])
-print("\nSorted by Marks:")
-print(df.sort_values(by='Marks', ascending=False))
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+from sklearn import tree
+import matplotlib.pyplot as plt
+# Load dataset
+iris = load_iris()
+X = iris.data
+y = iris.target
+# Split dataset
+X_train, X_test, y_train, y_test = train_test_split(
+ X, y, test_size=0.2, random_state=42
+)
+# ID3 uses entropy as criterion
+model = DecisionTreeClassifier(
+ criterion="entropy",
+ random_state=42
+)
+# Train
+model.fit(X_train, y_train)
+# Prediction
+y_pred = model.predict(X_test)
+print("Actual values:")
+print(y_test)
+print("\nPredicted values:")
+print(y_pred)
+print("\nAccuracy:",
+ accuracy_score(y_test, y_pred))
+# Display tree
+plt.figure(figsize=(12, 8))
+tree.plot_tree(
+ model,
+ feature_names=iris.feature_names,
+ class_names=iris.target_names,
+ filled=True
+)
+plt.show()
