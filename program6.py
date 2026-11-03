@@ -1,38 +1,74 @@
 
-import pandas as pd
+import cv2
+import numpy as np
 import matplotlib.pyplot as plt
-data = {
-    'Name': ['Amit', 'Neha', 'Raj', 'Priya', 'Karan'],
-    'Marks': [85, 90, 78, 95, 88],
-    'Age': [21, 22, 20, 23, 21]
-}
-df = pd.DataFrame(data)
-print("Dataset:")
-print(df)
-print("\nDescriptive Statistics:")
-print(df.describe())
-print("\nMean Marks:", df['Marks'].mean())
-print("Median Marks:", df['Marks'].median())
-print("Mode Marks:", df['Marks'].mode()[0])
-print("Standard Deviation:", round(df['Marks'].std(), 2))
-print("Variance:", round(df['Marks'].var(), 2))
-print("Minimum Marks:", df['Marks'].min())
-print("Maximum Marks:", df['Marks'].max())
-plt.figure(figsize=(8, 5))
-plt.bar(df['Name'], df['Marks'])
-plt.title('Student Marks')
-plt.xlabel('Student')
-plt.ylabel('Marks')
-plt.grid(axis='y')
+
+# Read input image
+img = cv2.imread("image.jpg")
+
+if img is None:
+    print("Error: Image not found!")
+    exit()
+
+# Convert BGR to RGB
+img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+height, width = img.shape[:2]
+
+# 1. Translation
+M = np.float32([[1, 0, 50],
+                [0, 1, 30]])
+
+translated = cv2.warpAffine(img, M, (width, height))
+
+# 2. Rotation
+center = (width // 2, height // 2)
+M = cv2.getRotationMatrix2D(center, 45, 1)
+
+rotated = cv2.warpAffine(img, M, (width, height))
+
+# 3. Scaling
+scaled = cv2.resize(img, None, fx=0.5, fy=0.5)
+
+# 4. Reflection
+reflected = cv2.flip(img, 1)
+
+# 5. Affine Transformation
+src_points = np.float32([
+    [0, 0],
+    [width - 1, 0],
+    [0, height - 1]
+])
+
+dst_points = np.float32([
+    [0, 50],
+    [width - 1, 0],
+    [50, height - 1]
+])
+
+M = cv2.getAffineTransform(src_points, dst_points)
+
+affine = cv2.warpAffine(img, M, (width, height))
+
+# Display all transformations
+images = [
+    (img, "Original Image"),
+    (translated, "Translation"),
+    (rotated, "Rotation"),
+    (scaled, "Scaling"),
+    (reflected, "Reflection"),
+    (affine, "Affine Transformation")
+]
+
+plt.figure(figsize=(12, 8))
+
+for i, (image, title) in enumerate(images):
+    plt.subplot(2, 3, i + 1)
+    plt.imshow(image)
+    plt.title(title)
+    plt.axis("off")
+
+plt.tight_layout()
 plt.show()
-plt.figure(figsize=(8, 5))
-plt.hist(df['Marks'], bins=5, edgecolor='black')
-plt.title('Distribution of Marks')
-plt.xlabel('Marks')
-plt.ylabel('Frequency')
-plt.show()
-plt.figure(figsize=(6, 5))
-plt.boxplot(df['Marks'])
-plt.title('Box Plot of Marks')
-plt.ylabel('Marks')
-plt.show()
+
+print("Geometric transformations completed successfully.")

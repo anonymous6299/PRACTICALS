@@ -1,25 +1,40 @@
-import pandas as pd
-data = {
-    'Name': ['Amit', 'Neha', 'Raj', 'Priya', 'Karan'],
-    'Age': [21, 22, 20, 23, 21],
-    'Marks': [85, 90, 78, 95, 88]
-}
-df = pd.DataFrame(data)
-print("Original Data:")
-print(df)
-print("\nFirst 3 Rows:")
-print(df.head(3))
-print("\nStatistical Description:")
-print(df.describe())
-print("\nColumn Names:")
-print(df.columns)
-print("\nShape of Data:")
-print(df.shape)
-print("\nViewing Marks Column:")
-print(df['Marks'])
-df['Marks'] = df['Marks'] + 5
-print("\nUpdated Data:")
-print(df)
-df = df[df['Age'] > 21]
-print("\nStudents Older Than 21:")
-print(df)
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Function to calculate Gaussian distribution
+def gaussian(X, m, s):
+    return (1 / np.sqrt(2 * np.pi * s)) * np.exp(
+        -((X - m) ** 2) / (2 * s)
+    )
+
+# Generate values of X
+X = np.linspace(-10, 10, 500)
+
+# Plot effect of varying mean
+plt.figure(figsize=(10, 5))
+
+for m in [-3, 0, 3]:
+    Y = gaussian(X, m, 1)
+    plt.plot(X, Y, label=f'Mean = {m}')
+
+plt.title("Effect of Varying Mean")
+plt.xlabel("X")
+plt.ylabel("Probability Density")
+plt.legend()
+plt.grid()
+plt.show()
+
+# Plot effect of varying variance
+plt.figure(figsize=(10, 5))
+
+for s in [0.5, 1, 2, 4]:
+    Y = gaussian(X, 0, s)
+    plt.plot(X, Y, label=f'Variance = {s}')
+
+plt.title("Effect of Varying Variance")
+plt.xlabel("X")
+plt.ylabel("Probability Density")
+plt.legend()
+plt.grid()
+plt.show()
