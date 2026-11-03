@@ -1,23 +1,37 @@
+import re
 
-import pandas as pd
-from sklearn.preprocessing import StandardScaler
-from sklearn.decomposition import PCA
-data = {
-    'Maths': [80, 90, 70, 85, 95],
-    'Science': [85, 95, 75, 80, 90],
-    'English': [78, 88, 65, 82, 92]
+# Define BNF grammar rules
+grammar = {
+    '<digit>': r'[0-9]',
+    '<number>': r'<digit>+',
+    '<operator>': r'[+\-*/]',
+    '<expression>': r'<number><operator><number>'
 }
-df = pd.DataFrame(data)
-print("Original Dataset:")
-print(df)
-scaler = StandardScaler()
-scaled_data = scaler.fit_transform(df)
-pca = PCA(n_components=2)
-pca_data = pca.fit_transform(scaled_data)
-result = pd.DataFrame(pca_data, columns=['PC1', 'PC2'])
-print("\nDataset After PCA:")
-print(result.round(3))
-print("\nExplained Variance Ratio:")
-print(pca.explained_variance_ratio_.round(3))
-print("\nTotal Variance Explained:")
-print(round(sum(pca.explained_variance_ratio_), 3))
+
+# Function to display grammar rules
+def display_grammar():
+    print("BNF Grammar Rules:")
+    for rule, definition in grammar.items():
+        print(rule, "::=", definition)
+
+# Function to validate expression
+def validate_expression(expression):
+    pattern = r'^[0-9]+[+\-*/][0-9]+$'
+
+    if re.fullmatch(pattern, expression):
+        return True
+    return False
+
+# Display grammar
+display_grammar()
+
+# Test expressions
+expressions = ["10+20", "5*4", "15-5", "10/2", "5+a", "abc+10"]
+
+print("\nExpression Validation:")
+
+for exp in expressions:
+    if validate_expression(exp):
+        print(exp, "is a valid expression")
+    else:
+        print(exp, "is an invalid expression")

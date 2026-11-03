@@ -1,22 +1,42 @@
+import re
 
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.linear_model import LinearRegression
-X = np.array([1, 2, 3, 4, 5]).reshape(-1, 1)
-y = np.array([2, 4, 5, 4, 5])
-model = LinearRegression()
-model.fit(X, y)
-y_pred = model.predict(X)
-print("Slope:", round(model.coef_[0], 2))
-print("Intercept:", round(model.intercept_, 2))
-print("Predicted Values:", np.round(y_pred, 2))
-print("R-squared Score:", round(model.score(X, y), 2))
-print("Prediction for X = 6:", round(model.predict([[6]])[0], 2))
-plt.scatter(X, y, color='blue', label='Actual Data')
-plt.plot(X, y_pred, color='red', label='Regression Line')
-plt.title('Linear Regression')
-plt.xlabel('X')
-plt.ylabel('Y')
-plt.legend()
-plt.grid(True)
-plt.show()
+# Sample text
+text = """
+Name: Rahul
+Email: rahul@gmail.com
+Phone: 9876543210
+Website: www.example.com
+"""
+
+# 1. Search for a word
+result = re.search(r'Rahul', text)
+print("Search Result:", result.group() if result else "Not Found")
+
+# 2. Find all numbers
+numbers = re.findall(r'\d+', text)
+print("\nNumbers Found:", numbers)
+
+# 3. Extract email address
+email = re.findall(r'[\w.-]+@[\w.-]+\.\w+', text)
+print("\nEmail Address:", email)
+
+# 4. Extract phone number
+phone = re.findall(r'\b\d{10}\b', text)
+print("\nPhone Number:", phone)
+
+# 5. Replace a word
+new_text = re.sub(r'Rahul', 'Amit', text)
+print("\nModified Text:")
+print(new_text)
+
+# 6. Validate email address
+test_email = "student@gmail.com"
+
+if re.fullmatch(r'[\w.-]+@[\w.-]+\.\w+', test_email):
+    print("Valid Email Address")
+else:
+    print("Invalid Email Address")
+
+# 7. Split text using whitespace
+words = re.split(r'\s+', "Python is easy to learn")
+print("\nSplit Words:", words)

@@ -1,25 +1,62 @@
-
+import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
-data = [10, 20, 30, 40, 50]
-arr = np.array(data)
-print("NumPy Array:")
-print(arr)
-print("Mean:", np.mean(arr))
-print("Maximum:", np.max(arr))
-print("Minimum:", np.min(arr))
-print("Sum:", np.sum(arr))
-student_data = {
-    'Name': ['Amit', 'Neha', 'Raj', 'Priya'],
-    'Age': [21, 22, 20, 23],
-    'Marks': [85, 90, 78, 95]
-}
-df = pd.DataFrame(student_data)
-print("\nDataFrame:")
-print(df)
-print("\nData Description:")
-print(df.describe())
-print("\nStudents Scoring Above 85:")
-print(df[df['Marks'] > 85])
-print("\nSorted by Marks:")
-print(df.sort_values(by='Marks', ascending=False))
+
+# Generate data
+x = np.linspace(0, 10, 100)
+y1 = x
+y2 = x ** 2
+y3 = np.sin(x)
+y4 = np.cos(x)
+
+# 1. Linear Graph
+plt.figure(figsize=(7, 5))
+plt.plot(x, y1, label='y = x')
+plt.title("Linear Graph")
+plt.xlabel("X-axis")
+plt.ylabel("Y-axis")
+plt.legend()
+plt.grid(True)
+plt.show()
+
+# 2. Quadratic Graph
+plt.figure(figsize=(7, 5))
+plt.plot(x, y2, color='red', label='y = x²')
+plt.title("Quadratic Graph")
+plt.xlabel("X-axis")
+plt.ylabel("Y-axis")
+plt.legend()
+plt.grid(True)
+plt.show()
+
+# 3. Sine Graph
+plt.figure(figsize=(7, 5))
+plt.plot(x, y3, color='green', label='y = sin(x)')
+plt.title("Sine Graph")
+plt.xlabel("X-axis")
+plt.ylabel("Y-axis")
+plt.legend()
+plt.grid(True)
+plt.show()
+
+# 4. Cosine Graph
+plt.figure(figsize=(7, 5))
+plt.plot(x, y4, color='orange', label='y = cos(x)')
+plt.title("Cosine Graph")
+plt.xlabel("X-axis")
+plt.ylabel("Y-axis")
+plt.legend()
+plt.grid(True)
+plt.show()
+
+# 5. Multiple Graphs
+plt.figure(figsize=(8, 5))
+plt.plot(x, y1, label='Linear')
+plt.plot(x, y2, label='Quadratic')
+plt.plot(x, y3, label='Sine')
+plt.plot(x, y4, label='Cosine')
+plt.title("Combined Graph")
+plt.xlabel("X-axis")
+plt.ylabel("Y-axis")
+plt.legend()
+plt.grid(True)
+plt.show()

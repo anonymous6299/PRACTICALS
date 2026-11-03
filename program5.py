@@ -1,32 +1,41 @@
-
-import pandas as pd
 import matplotlib.pyplot as plt
+import pandas as pd
+
+# Create sample geographical dataset
 data = {
-    'Month': ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
-    'Sales': [120, 150, 100, 180, 200],
-    'Profit': [20, 30, 15, 40, 50]
+    'City': ['Delhi', 'Mumbai', 'Kolkata', 'Chennai', 'Bangalore'],
+    'Latitude': [28.61, 19.07, 22.57, 13.08, 12.97],
+    'Longitude': [77.20, 72.87, 88.36, 80.27, 77.59],
+    'Population': [32, 21, 15, 11, 13]
 }
+
+# Create DataFrame
 df = pd.DataFrame(data)
-df.to_csv('sales_data.csv', index=False)
-print("Data Stored Successfully")
-print("\nSales Data:")
+
+# Display dataset
+print("Geographical Data:")
 print(df)
-print("\nStatistical Analysis:")
-print(df.describe())
-print("\nTotal Sales:", df['Sales'].sum())
-print("Average Sales:", df['Sales'].mean())
-print("Total Profit:", df['Profit'].sum())
-plt.figure(figsize=(8, 5))
-plt.bar(df['Month'], df['Sales'])
-plt.title('Monthly Sales Analysis')
-plt.xlabel('Month')
-plt.ylabel('Sales')
-plt.grid(axis='y')
-plt.show()
-plt.figure(figsize=(8, 5))
-plt.plot(df['Month'], df['Profit'], marker='o')
-plt.title('Monthly Profit Analysis')
-plt.xlabel('Month')
-plt.ylabel('Profit')
+
+# Create data mapping
+plt.figure(figsize=(9, 6))
+
+plt.scatter(df['Longitude'], df['Latitude'],
+            s=df['Population'] * 50,
+            c=df['Population'],
+            cmap='viridis',
+            edgecolor='black')
+
+# Add city labels
+for i in range(len(df)):
+    plt.text(df['Longitude'][i] + 0.3,
+             df['Latitude'][i] + 0.3,
+             df['City'][i])
+
+# Add labels and title
+plt.title("Geographical Data Mapping of Indian Cities")
+plt.xlabel("Longitude")
+plt.ylabel("Latitude")
+
+plt.colorbar(label="Population (in millions)")
 plt.grid(True)
 plt.show()
