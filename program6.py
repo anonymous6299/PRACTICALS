@@ -1,3 +1,13 @@
+''' 
+AIM= Chatbot implementation using bi-directional LSTMs  
+
+REL. THEORY=
+A chatbot is an application that communicates with users through text-based conversations. Long Short-Term Memory (LSTM) networks are recurrent neural networks designed to learn long-term dependencies in sequential data. A Bidirectional LSTM processes input sequences in both forward and backward directions. It helps understand contextual information and generate suitable responses in conversational applications.
+
+
+
+CODE=                                     '''
+
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
@@ -94,3 +104,11 @@ while True:
 
     response = chatbot_response(user_input)
     print("Chatbot:", response)
+
+
+'''
+LO=
+1. Understood the working of LSTM networks.
+2. Implemented a Bidirectional LSTM model.
+3. Developed a basic text-based chatbot.
+'''

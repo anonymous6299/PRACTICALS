@@ -1,3 +1,12 @@
+''' 
+AIM= Image classification on MNIST dataset (CNN model with fully connected layer) 
+
+REL. THEORY=
+Convolutional Neural Networks (CNNs) are deep learning models commonly used for image classification and computer vision tasks. They use convolutional layers to extract image features and pooling layers to reduce spatial dimensions. Fully connected layers classify the extracted features into different categories. The MNIST dataset contains handwritten digit images from 0 to 9.
+
+
+
+CODE=                                     '''
 import tensorflow as tf
 import matplotlib.pyplot as plt
 import numpy as np
@@ -74,3 +83,11 @@ for i in range(5):
 
 plt.tight_layout()
 plt.show()
+
+
+'''
+LO=
+1. Understood CNN architecture and its layers.
+2. Trained a model using the MNIST dataset.
+3. Classified handwritten digits using deep learning.
+'''

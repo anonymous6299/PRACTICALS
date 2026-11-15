@@ -1,3 +1,12 @@
+''' 
+AIM= Train a sentiment analysis model on IMDB dataset, use RNN layers with LSTM/GRU   
+
+REL. THEORY=
+Sentiment Analysis is a Natural Language Processing technique used to identify opinions and emotions expressed in text. Recurrent Neural Networks process sequential data, while LSTM and GRU networks help capture long-term dependencies. The IMDB dataset contains movie reviews labelled as positive or negative. Deep learning models can use this dataset to classify the sentiment of reviews.
+
+
+
+CODE=                                     '''
 import tensorflow as tf
 import numpy as np
 from tensorflow.keras.datasets import imdb
@@ -70,3 +79,11 @@ for i in range(5):
     print("Actual:", "Positive" if y_test[i] == 1 else "Negative")
 
 print("\nSentiment Analysis Completed!")
+
+
+'''
+LO=
+1. Understood sentiment analysis using NLP.
+2. Implemented LSTM and GRU layers.
+3. Classified movie reviews as positive or negative.
+'''

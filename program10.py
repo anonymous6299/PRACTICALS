@@ -1,4 +1,12 @@
+''' 
+AIM= Applying the Convolution Neural Network on computer vision problems
 
+REL. THEORY=
+Computer Vision is a field of artificial intelligence that enables computers to interpret and analyze visual information. Convolutional Neural Networks are widely used to extract features and classify images automatically. The CIFAR-10 dataset contains 60,000 colour images belonging to 10 different classes. CNN models use convolution, pooling, and fully connected layers to perform image classification.
+
+
+
+CODE=                                     '''
 import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
@@ -130,3 +138,11 @@ plt.tight_layout()
 plt.show()
 
 print("CNN Computer Vision Program Completed!")
+
+
+'''
+LO=
+1. Understood CNN applications in computer vision.
+2. Trained a CNN using the CIFAR-10 dataset.
+3. Classified images into different object categories.
+'''

@@ -1,3 +1,12 @@
+''' 
+AIM= Applying the Deep Learning Models in the field of Natural Language Processing  
+
+REL. THEORY=
+Natural Language Processing (NLP) enables computers to understand and process human language. Deep learning models use neural networks to identify patterns and relationships in textual data. Tokenization converts text into numerical sequences, while embedding layers represent words as dense vectors. LSTM networks can process these sequences for tasks such as text classification and sentiment prediction.
+
+
+
+CODE=                                     '''
 import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
@@ -83,3 +92,11 @@ for i in range(len(test_sentences)):
     print(test_sentences[i], ":", result)
 
 print("\nNLP Model Execution Completed!")
+
+
+'''
+LO=
+1. Understood the role of deep learning in NLP.
+2. Applied tokenization and word embeddings.
+3. Built an LSTM-based text classification model.
+'''

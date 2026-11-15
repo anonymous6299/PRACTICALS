@@ -1,3 +1,14 @@
+''' 
+AIM= Implement deep Q-network with PyTorch 
+
+REL. THEORY=
+Deep Q-Network (DQN) is a reinforcement learning algorithm that combines Q-Learning with deep neural networks. It uses a neural network to estimate Q-values for different actions instead of maintaining a traditional Q-table. Experience replay and a target network improve training stability. DQN is useful for solving complex environments with large state spaces.
+
+
+
+CODE=                                     '''
+
+
 import gymnasium as gym
 import torch
 import torch.nn as nn
@@ -129,3 +140,13 @@ while not done:
 test_env.close()
 
 print("DQN Training and Testing Completed!")
+
+
+'''
+LO=
+1. Understood the working of Deep Q-Networks.
+2. Implemented DQN using PyTorch.
+3. Trained an agent to balance the CartPole environment.
+
+
+'''

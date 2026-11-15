@@ -1,3 +1,13 @@
+''' 
+AIM= Implement Q-learning with pure Python to play a game
+
+REL. THEORY=
+Q-Learning is a model-free reinforcement learning algorithm that helps an agent learn the best actions through interaction with an environment. It maintains a Q-table containing the expected rewards for state-action pairs. The agent improves its decisions using rewards and penalties received during training. It is commonly used in game-playing and decision-making applications.
+
+
+
+CODE=                                     '''
+
 import gymnasium as gym
 import numpy as np
 import random
@@ -75,3 +85,12 @@ else:
     print("Agent failed to reach the goal.")
 
 env.close()
+
+
+
+'''
+LO=
+1. Understood the basic concept of Q-Learning.
+2. Implemented a Q-table for action selection.
+3. Trained an agent to reach a game goal.
+'''

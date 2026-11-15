@@ -1,3 +1,13 @@
+''' 
+AIM= Installing Keras, Tensorflow and Pytorch libraries and making use of them 
+
+REL. THEORY=
+TensorFlow, Keras, and PyTorch are popular frameworks used for deep learning and neural network development. TensorFlow provides tools for building and training machine learning models, while Keras offers a simple high-level interface. PyTorch provides flexible tensor operations and automatic differentiation. These frameworks help develop and execute deep learning applications efficiently.
+
+
+
+CODE=                                     '''
+
 # Import required libraries
 import tensorflow as tf
 import keras
@@ -35,3 +45,12 @@ print("Addition:", result)
 print("Multiplication:", x * y)
 
 print("\nAll libraries executed successfully!")
+
+
+'''
+L.O=
+1. Learned to install deep learning frameworks.
+2. Understood basic tensor operations.
+3. Created and executed a simple neural network model.
+
+'''

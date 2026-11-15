@@ -1,5 +1,12 @@
-# Program to demonstrate Spyder IDE environment
-# and execute a basic Python program
+''' 
+AIM= Setting ○p the Spyder IDE Environment and Executing a Python Program  
+
+REL. THEORY=
+Spyder is an open-source Integrated Development Environment (IDE) designed for Python programming. It provides a code editor, interactive console, variable explorer, and debugging tools. It makes writing, executing, and testing Python programs easier. Spyder is widely used in scientific computing, data analysis, and machine learning applications.
+
+
+
+CODE=                                     '''
 
 # Import required library
 import sys
@@ -24,3 +31,13 @@ print("Division:", a / b)
 
 # Display successful execution message
 print("\nProgram executed successfully in Spyder IDE!")
+
+
+
+'''
+L.O=
+1. Learned to install and configure Spyder IDE.
+2. Understood the Python execution environment.
+3. Executed and tested basic Python programs.
+
+'''

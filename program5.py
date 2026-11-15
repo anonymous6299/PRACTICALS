@@ -1,3 +1,13 @@
+''' 
+AIM= Python implementation of the iterative policy evaluation and update. 
+
+REL. THEORY=
+Iterative Policy Evaluation is a reinforcement learning technique used to calculate the value of states under a given policy. It repeatedly updates state values using the Bellman expectation equation until the values converge. Policy improvement selects better actions based on the calculated values. These steps form the foundation of policy iteration in reinforcement learning.
+
+
+
+CODE=                                     '''
+
 import numpy as np
 
 # Define GridWorld environment
@@ -108,3 +118,10 @@ for state in range(states):
         print()
 
 print("\nTotal Iterations:", iteration)
+
+'''
+LO=
+1. Understood policy evaluation and improvement.
+2. Calculated state values iteratively.
+3. Implemented policy iteration for GridWorld.
+'''
