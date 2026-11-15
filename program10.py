@@ -1,3 +1,10 @@
+'''
+AIM=Understanding Data Visualization frameworks
+
+REL. THEORY=
+Data visualization frameworks provide tools for representing and analyzing information graphically. Python offers frameworks such as Matplotlib, Seaborn, and Plotly for creating static, statistical, and interactive visualizations. These frameworks make data analysis more effective and understandable.
+
+CODE=                                                                '''
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
@@ -52,3 +59,12 @@ sns.heatmap(
 )
 plt.title("Seaborn - Correlation Heatmap")
 plt.show()
+
+
+
+'''
+LO=
+1.	Explored different Python visualization frameworks.
+2.	Created static and interactive visualizations.
+3.	Understood the applications of visualization libraries.
+'''

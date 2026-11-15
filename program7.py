@@ -1,3 +1,11 @@
+'''
+AIM=Using BNF Notations
+
+REL. THEORY=
+Backus-Naur Form (BNF) is a formal notation used to describe the syntax of programming languages and expressions. It consists of grammar rules that define valid structures using terminals and non-terminals. BNF helps understand and validate the structure of expressions.
+
+CODE=                                                                '''
+
 import re
 
 # Define BNF grammar rules
@@ -35,3 +43,12 @@ for exp in expressions:
         print(exp, "is a valid expression")
     else:
         print(exp, "is an invalid expression")
+
+
+'''
+LO=
+1.	Learned basic BNF grammar rules.
+2.	Understood terminals and non-terminals.
+3.	Practiced validating expressions using grammar patterns.
+
+'''

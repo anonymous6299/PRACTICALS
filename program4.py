@@ -1,3 +1,10 @@
+'''
+AIM=Drawing Graphs
+
+REL. THEORY=
+Graphs are used to represent mathematical relationships between variables. Python libraries like Matplotlib and NumPy help generate and visualize different mathematical functions, including linear, quadratic, sine, and cosine graphs. Graphs help understand trends and variations in data.
+
+CODE=                                                                '''
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -60,3 +67,12 @@ plt.ylabel("Y-axis")
 plt.legend()
 plt.grid(True)
 plt.show()
+
+
+'''
+LO=
+1.	Learned to plot mathematical functions.
+2.	Explored different types of graphs.
+3.	Understood relationships between variables.
+
+'''

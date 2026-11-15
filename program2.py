@@ -1,3 +1,10 @@
+'''
+AIM= Exploring Data Visualization tools 
+
+REL. THEORY=
+Data visualization tools help represent data graphically for better understanding and analysis. Python provides libraries such as Matplotlib, Seaborn, and Pandas to create charts, graphs, and statistical visualizations. These tools make complex data easier to interpret.
+
+CODE=                                                                '''
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
@@ -53,3 +60,11 @@ sns.heatmap(df[['Marks', 'Attendance']].corr(),
             annot=True, cmap='coolwarm')
 plt.title("Correlation Heatmap")
 plt.show()
+
+
+'''
+LO=
+1.	Explored different visualization libraries.
+2.	Learned to create basic visualizations.
+3.	Understood graphical data representation.
+'''

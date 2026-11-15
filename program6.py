@@ -1,3 +1,10 @@
+'''
+AIM=Creating Scatter Plot maps
+
+REL. THEORY=
+Scatter plots represent relationships between two numerical variables using individual data points. They help identify patterns, trends, clusters, and correlations. Python Matplotlib provides scatter plot functions that support different colors, sizes, and markers for effective visualization.
+
+CODE=                                                                '''
 import matplotlib.pyplot as plt
 import pandas as pd
 
@@ -51,3 +58,10 @@ plt.ylabel("Marks")
 
 plt.grid(True)
 plt.show()
+
+'''
+LO=
+1.	Learned to create scatter plots.
+2.	Understood relationships between numerical variables.
+3.	Identified patterns and trends in data.
+'''

@@ -1,3 +1,10 @@
+'''
+AIM=Data mapping
+
+REL. THEORY=
+Data mapping is the process of representing geographical information using maps and coordinates. Latitude and longitude are used to identify locations, while additional data can represent different attributes. Python libraries like Pandas and Matplotlib help visualize geographical data.
+
+CODE=                                                                '''
 import matplotlib.pyplot as plt
 import pandas as pd
 
@@ -39,3 +46,10 @@ plt.ylabel("Latitude")
 plt.colorbar(label="Population (in millions)")
 plt.grid(True)
 plt.show()
+
+'''
+LO=
+1.	Learned to represent geographical data.
+2.	Understood latitude and longitude coordinates.
+3.	Visualized location-based information.
+'''

@@ -1,3 +1,11 @@
+'''
+AIM=Drawing Charts
+
+REL. THEORY=
+Charts are graphical representations of data used to compare values and identify patterns. Different charts, such as bar charts, pie charts, line charts, histograms, and scatter plots, serve different purposes. Python Matplotlib provides functions to create and customize these charts.
+
+CODE=                                                                '''
+
 import matplotlib.pyplot as plt
 
 # Sample data
@@ -46,3 +54,13 @@ plt.title("Scatter Plot of Marks")
 plt.xlabel("Subjects")
 plt.ylabel("Marks")
 plt.show()
+
+
+'''
+LO=
+1.Learned to create different types of charts.
+2.Understood chart customization techniques.
+3.Improved data comparison and interpretation skills.
+
+
+'''

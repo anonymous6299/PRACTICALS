@@ -1,3 +1,10 @@
+'''
+AIM=Visualize Network Data
+
+REL. THEORY=
+Network visualization represents relationships between different entities using nodes and edges. Nodes represent objects, while edges represent connections between them. Python NetworkX and Matplotlib libraries help create, analyze, and visualize network structures.
+
+CODE=                                                                '''
 import networkx as nx
 import matplotlib.pyplot as plt
 
@@ -59,3 +66,11 @@ nx.draw_networkx_labels(
 plt.title("Network Data Visualization")
 plt.axis('off')
 plt.show()
+
+
+'''
+LO=
+1.	Learned to create network graphs.
+2.	Understood nodes and edges.
+3.	Visualized relationships between connected entities.
+'''

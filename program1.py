@@ -1,3 +1,11 @@
+'''
+AIM=Loading and Distinguishing Dependent and Independent parameters
+
+REL. THEORY=
+Data visualization begins with loading and understanding datasets. Independent parameters are input variables used for analysis, while dependent parameters are output variables influenced by them. Python libraries like Pandas and Scikit-learn help load, organize, and distinguish these variables.
+
+CODE=                                                                '''
+
 import pandas as pd
 from sklearn.datasets import load_iris
 
@@ -31,3 +39,11 @@ print(Y.head())
 # Display shapes
 print("\nShape of Independent Parameters:", X.shape)
 print("Shape of Dependent Parameter:", Y.shape)
+
+
+'''
+LO=
+1.	Learned to load datasets using Python.
+2.	Identified dependent and independent variables.
+3.	Understood basic dataset structure.
+'''

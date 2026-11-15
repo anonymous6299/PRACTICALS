@@ -1,3 +1,10 @@
+'''
+AIM=Working with REGEX 
+
+REL. THEORY=
+Regular Expressions (REGEX) are patterns used to search, match, extract, and replace text. Python provides the built-in re module to perform operations such as pattern matching, text validation, and string replacement. REGEX simplifies text processing and data extraction.
+
+CODE=                                                                '''
 import re
 
 # Sample text
@@ -40,3 +47,11 @@ else:
 # 7. Split text using whitespace
 words = re.split(r'\s+', "Python is easy to learn")
 print("\nSplit Words:", words)
+
+'''
+LO=
+1.	Learned regular expression syntax.
+2.	Practiced searching and extracting text patterns.
+3.	Understood text validation and replacement.
+
+'''
