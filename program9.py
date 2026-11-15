@@ -1,76 +1,85 @@
-import cv2
+import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Read two images
-img1 = cv2.imread("image1.jpg")
-img2 = cv2.imread("image2.jpg")
+from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Embedding, LSTM, Dense, Dropout
 
-if img1 is None or img2 is None:
-    print("Error: Images not found!")
-    exit()
+# Sample text dataset
+sentences = [
+    "I love machine learning",
+    "Deep learning is very interesting",
+    "Python is easy to learn",
+    "I enjoy artificial intelligence",
+    "This is a great experience",
+    "I hate wasting my time",
+    "The movie was very boring",
+    "This is a bad experience",
+    "I dislike this program",
+    "The service is very poor"
+]
 
-# Convert images to RGB
-img1 = cv2.cvtColor(img1, cv2.COLOR_BGR2RGB)
-img2 = cv2.cvtColor(img2, cv2.COLOR_BGR2RGB)
+# Labels: 1 = Positive, 0 = Negative
+labels = np.array([1, 1, 1, 1, 1, 0, 0, 0, 0, 0])
 
-# Convert images to grayscale
-gray1 = cv2.cvtColor(img1, cv2.COLOR_RGB2GRAY)
-gray2 = cv2.cvtColor(img2, cv2.COLOR_RGB2GRAY)
+# Initialize tokenizer
+tokenizer = Tokenizer(num_words=1000)
+tokenizer.fit_on_texts(sentences)
 
-# Initialize ORB detector
-orb = cv2.ORB_create(1000)
+# Convert text into sequences
+sequences = tokenizer.texts_to_sequences(sentences)
 
-# Detect keypoints and descriptors
-kp1, des1 = orb.detectAndCompute(gray1, None)
-kp2, des2 = orb.detectAndCompute(gray2, None)
-
-# Match features using BFMatcher
-bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
-matches = bf.match(des1, des2)
-
-# Sort matches by distance
-matches = sorted(matches, key=lambda x: x.distance)
-
-# Extract matched points
-pts1 = np.float32([
-    kp1[m.queryIdx].pt for m in matches
-])
-
-pts2 = np.float32([
-    kp2[m.trainIdx].pt for m in matches
-])
-
-# Compute Fundamental Matrix
-F, mask = cv2.findFundamentalMat(
-    pts1, pts2, cv2.FM_RANSAC, 1.0, 0.99
+# Apply padding
+max_length = 6
+X = pad_sequences(
+    sequences, maxlen=max_length, padding='post'
 )
 
-if F is None:
-    print("Fundamental Matrix could not be computed!")
-    exit()
+# Build LSTM model
+model = Sequential([
+    Embedding(input_dim=1000, output_dim=32),
+    LSTM(32),
+    Dropout(0.3),
+    Dense(16, activation='relu'),
+    Dense(1, activation='sigmoid')
+])
 
-# Select inlier matches
-inliers = mask.ravel() == 1
-
-print("Fundamental Matrix:")
-print(F)
-
-print("\nTotal Matches:", len(matches))
-print("Inlier Matches:", np.sum(inliers))
-
-# Draw matching points
-matched_img = cv2.drawMatches(
-    img1, kp1, img2, kp2,
-    matches[:30], None,
-    flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS
+# Compile model
+model.compile(
+    optimizer='adam',
+    loss='binary_crossentropy',
+    metrics=['accuracy']
 )
 
-# Display images and matches
-plt.figure(figsize=(12, 6))
-plt.imshow(matched_img)
-plt.title("Feature Matching Between Two Images")
-plt.axis("off")
-plt.show()
+# Train model
+model.fit(X, labels, epochs=100, verbose=1)
 
-print("\nFundamental Matrix computed successfully.")
+# Display model summary
+model.summary()
+
+# Test new sentences
+test_sentences = [
+    "I love deep learning",
+    "This program is boring",
+    "Python is interesting",
+    "I hate this experience"
+]
+
+# Convert test sentences
+test_sequences = tokenizer.texts_to_sequences(test_sentences)
+test_data = pad_sequences(
+    test_sequences, maxlen=max_length, padding='post'
+)
+
+# Predict results
+predictions = model.predict(test_data)
+
+print("\nNLP Text Classification Results:")
+
+for i in range(len(test_sentences)):
+    result = "Positive" if predictions[i][0] >= 0.5 else "Negative"
+    print(test_sentences[i], ":", result)
+
+print("\nNLP Model Execution Completed!")

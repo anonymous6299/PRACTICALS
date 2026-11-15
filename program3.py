@@ -1,51 +1,77 @@
-
+import gymnasium as gym
 import numpy as np
-import matplotlib.pyplot as plt
+import random
+import time
 
-# Generate sample dataset
-X = np.array([1, 2, 3, 4, 5, 6, 7, 8])
-Y = np.array([2, 4, 5, 4, 5, 7, 8, 9])
+# Create FrozenLake environment
+env = gym.make("FrozenLake-v1", is_slippery=False)
 
-# Initialize parameters
-m = 0
-b = 0
-learning_rate = 0.01
-iterations = 1000
-n = len(X)
+# Initialize Q-table
+state_size = env.observation_space.n
+action_size = env.action_space.n
+Q = np.zeros((state_size, action_size))
 
-# Gradient Descent
-for i in range(iterations):
-    Y_pred = m * X + b
+# Set hyperparameters
+learning_rate = 0.8
+discount_factor = 0.95
+epsilon = 1.0
+epsilon_decay = 0.995
+min_epsilon = 0.01
+episodes = 2000
+max_steps = 100
 
-    # Calculate gradients
-    dm = (-2/n) * np.sum(X * (Y - Y_pred))
-    db = (-2/n) * np.sum(Y - Y_pred)
+# Train the Q-learning agent
+for episode in range(episodes):
+    state, info = env.reset()
+    done = False
 
-    # Update parameters
-    m = m - learning_rate * dm
-    b = b - learning_rate * db
+    for step in range(max_steps):
 
-    # Calculate cost
-    cost = np.mean((Y - Y_pred) ** 2)
+        # Epsilon-greedy action selection
+        if random.uniform(0, 1) < epsilon:
+            action = env.action_space.sample()
+        else:
+            action = np.argmax(Q[state, :])
 
-    if (i + 1) % 100 == 0:
-        print(f"Iteration {i+1}: Cost = {cost:.4f}")
+        # Perform action
+        next_state, reward, terminated, truncated, info = env.step(action)
+        done = terminated or truncated
 
-# Display final parameters
-print("\nSlope (m):", round(m, 4))
-print("Intercept (b):", round(b, 4))
+        # Update Q-table
+        Q[state, action] += learning_rate * (
+            reward + discount_factor * np.max(Q[next_state, :]) * (not done)
+            - Q[state, action]
+        )
 
-# Predict values
-Y_pred = m * X + b
+        state = next_state
 
-# Plot original data and regression line
-plt.figure(figsize=(8, 5))
-plt.scatter(X, Y, color='blue', label='Actual Data')
-plt.plot(X, Y_pred, color='red', label='Regression Line')
+        if done:
+            break
 
-plt.title("Linear Regression using Gradient Descent")
-plt.xlabel("X Values")
-plt.ylabel("Y Values")
-plt.legend()
-plt.grid()
-plt.show()
+    # Reduce exploration rate
+    epsilon = max(min_epsilon, epsilon * epsilon_decay)
+
+print("Training completed!")
+print("\nTrained Q-Table:")
+print(Q)
+
+# Watch the trained agent play
+env = gym.make("FrozenLake-v1", is_slippery=False, render_mode="human")
+
+state, info = env.reset()
+done = False
+
+print("\nTrained Agent Playing the Game:")
+
+while not done:
+    action = np.argmax(Q[state, :])
+    state, reward, terminated, truncated, info = env.step(action)
+    done = terminated or truncated
+    time.sleep(0.5)
+
+if reward == 1:
+    print("Agent successfully reached the goal!")
+else:
+    print("Agent failed to reach the goal.")
+
+env.close()

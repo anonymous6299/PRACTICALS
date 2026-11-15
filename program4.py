@@ -1,96 +1,131 @@
-
+import gymnasium as gym
+import torch
+import torch.nn as nn
+import torch.optim as optim
 import numpy as np
-import matplotlib.pyplot as plt
+import random
+from collections import deque
 
-from sklearn.datasets import load_digits
-from sklearn.model_selection import train_test_split
-from sklearn.svm import SVC
-from sklearn.metrics import accuracy_score
-from sklearn.preprocessing import StandardScaler
+# Create CartPole environment
+env = gym.make("CartPole-v1")
 
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Conv2D, MaxPooling2D
-from tensorflow.keras.layers import Flatten, Dense
+# Define neural network
+class DQN(nn.Module):
+    def __init__(self, state_size, action_size):
+        super(DQN, self).__init__()
+        self.network = nn.Sequential(
+            nn.Linear(state_size, 24),
+            nn.ReLU(),
+            nn.Linear(24, 24),
+            nn.ReLU(),
+            nn.Linear(24, action_size)
+        )
 
-# Load handwritten digits dataset
-digits = load_digits()
-X = digits.images
-Y = digits.target
+    def forward(self, x):
+        return self.network(x)
 
-# Split dataset
-X_train, X_test, y_train, y_test = train_test_split(
-    X, Y, test_size=0.2, random_state=42, stratify=Y
-)
+# Initialize parameters
+state_size = env.observation_space.shape[0]
+action_size = env.action_space.n
 
-# ---------------- SVM CLASSIFIER ----------------
+model = DQN(state_size, action_size)
+target_model = DQN(state_size, action_size)
+target_model.load_state_dict(model.state_dict())
 
-# Flatten images for SVM
-X_train_svm = X_train.reshape(len(X_train), -1)
-X_test_svm = X_test.reshape(len(X_test), -1)
+optimizer = optim.Adam(model.parameters(), lr=0.001)
+memory = deque(maxlen=10000)
 
-# Standardize data
-scaler = StandardScaler()
-X_train_svm = scaler.fit_transform(X_train_svm)
-X_test_svm = scaler.transform(X_test_svm)
+gamma = 0.99
+epsilon = 1.0
+epsilon_min = 0.01
+epsilon_decay = 0.995
+batch_size = 64
+episodes = 300
 
-# Train SVM model
-svm = SVC(kernel='rbf')
-svm.fit(X_train_svm, y_train)
+# Select action using epsilon-greedy policy
+def select_action(state):
+    if random.random() < epsilon:
+        return env.action_space.sample()
 
-# SVM prediction
-svm_pred = svm.predict(X_test_svm)
-svm_accuracy = accuracy_score(y_test, svm_pred)
+    state = torch.FloatTensor(state).unsqueeze(0)
+    with torch.no_grad():
+        return model(state).argmax().item()
 
-print("SVM Accuracy:", round(svm_accuracy * 100, 2), "%")
+# Train DQN using replay memory
+def train_model():
+    if len(memory) < batch_size:
+        return
 
-# ---------------- CNN CLASSIFIER ----------------
+    batch = random.sample(memory, batch_size)
 
-# Normalize and reshape images
-X_train_cnn = X_train.reshape(-1, 8, 8, 1) / 16.0
-X_test_cnn = X_test.reshape(-1, 8, 8, 1) / 16.0
+    states, actions, rewards, next_states, dones = zip(*batch)
 
-# Build CNN model
-cnn = Sequential([
-    Conv2D(32, (3, 3), activation='relu',
-           input_shape=(8, 8, 1)),
-    MaxPooling2D((2, 2)),
-    Flatten(),
-    Dense(64, activation='relu'),
-    Dense(10, activation='softmax')
-])
+    states = torch.FloatTensor(np.array(states))
+    actions = torch.LongTensor(actions).unsqueeze(1)
+    rewards = torch.FloatTensor(rewards)
+    next_states = torch.FloatTensor(np.array(next_states))
+    dones = torch.FloatTensor(dones)
 
-# Compile model
-cnn.compile(optimizer='adam',
-            loss='sparse_categorical_crossentropy',
-            metrics=['accuracy'])
+    current_q = model(states).gather(1, actions).squeeze()
 
-# Train CNN model
-cnn.fit(X_train_cnn, y_train,
-        epochs=20, batch_size=32, verbose=0)
+    with torch.no_grad():
+        next_q = target_model(next_states).max(1)[0]
+        target_q = rewards + gamma * next_q * (1 - dones)
 
-# Evaluate CNN model
-loss, cnn_accuracy = cnn.evaluate(
-    X_test_cnn, y_test, verbose=0
-)
+    loss = nn.MSELoss()(current_q, target_q)
 
-print("CNN Accuracy:", round(cnn_accuracy * 100, 2), "%")
+    optimizer.zero_grad()
+    loss.backward()
+    optimizer.step()
 
-# ---------------- COMPARISON ----------------
+# Training loop
+for episode in range(episodes):
+    state, info = env.reset()
+    total_reward = 0
 
-models = ['SVM', 'CNN']
-accuracies = [svm_accuracy * 100, cnn_accuracy * 100]
+    for step in range(500):
+        action = select_action(state)
 
-plt.figure(figsize=(8, 5))
-plt.bar(models, accuracies, width=0.5)
+        next_state, reward, terminated, truncated, info = env.step(action)
+        done = terminated or truncated
 
-plt.title("SVM vs CNN Classification Accuracy")
-plt.xlabel("Classification Models")
-plt.ylabel("Accuracy (%)")
-plt.ylim(0, 100)
+        memory.append((
+            state, action, reward, next_state, done
+        ))
 
-for i, value in enumerate(accuracies):
-    plt.text(i, value + 1, f'{value:.2f}%',
-             ha='center')
+        state = next_state
+        total_reward += reward
 
-plt.grid(axis='y')
-plt.show()
+        train_model()
+
+        if done:
+            break
+
+    epsilon = max(epsilon_min, epsilon * epsilon_decay)
+
+    # Update target network
+    if episode % 10 == 0:
+        target_model.load_state_dict(model.state_dict())
+
+    print("Episode:", episode + 1, "Reward:", total_reward)
+
+env.close()
+
+# Test trained agent
+test_env = gym.make("CartPole-v1", render_mode="human")
+
+state, info = test_env.reset()
+done = False
+
+while not done:
+    state_tensor = torch.FloatTensor(state).unsqueeze(0)
+
+    with torch.no_grad():
+        action = model(state_tensor).argmax().item()
+
+    state, reward, terminated, truncated, info = test_env.step(action)
+    done = terminated or truncated
+
+test_env.close()
+
+print("DQN Training and Testing Completed!")

@@ -1,89 +1,110 @@
+import numpy as np
 
-import cv2
-import matplotlib.pyplot as plt
+# Define GridWorld environment
+rows = 4
+cols = 4
+states = rows * cols
+actions = ['UP', 'DOWN', 'LEFT', 'RIGHT']
 
-# Read the input image
-img = cv2.imread("image.jpg")
+# Initialize value function
+V = np.zeros(states)
 
-# Check whether image is loaded
-if img is None:
-    print("Error: Image not found!")
-    exit()
+# Set parameters
+gamma = 0.9
+theta = 0.001
+reward = -1
 
-# Convert BGR to RGB
-img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+# Define transition function
+def get_next_state(state, action):
+    row = state // cols
+    col = state % cols
 
-# Display original image
-plt.figure(figsize=(12, 8))
+    if action == 'UP':
+        row = max(0, row - 1)
+    elif action == 'DOWN':
+        row = min(rows - 1, row + 1)
+    elif action == 'LEFT':
+        col = max(0, col - 1)
+    elif action == 'RIGHT':
+        col = min(cols - 1, col + 1)
 
-plt.subplot(2, 3, 1)
-plt.imshow(img_rgb)
-plt.title("Original Image")
-plt.axis("off")
+    return row * cols + col
 
-# Convert image to grayscale
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+# Initialize random policy
+policy = np.random.randint(0, 4, states)
 
-plt.subplot(2, 3, 2)
-plt.imshow(gray, cmap='gray')
-plt.title("Grayscale Image")
-plt.axis("off")
+# Iterative Policy Evaluation
+def policy_evaluation():
+    global V
 
-# Resize image
-resized = cv2.resize(img_rgb, (200, 200))
+    while True:
+        delta = 0
 
-plt.subplot(2, 3, 3)
-plt.imshow(resized)
-plt.title("Resized Image")
-plt.axis("off")
+        for state in range(states):
+            if state == 0 or state == states - 1:
+                continue
 
-# Crop image
-cropped = img_rgb[50:200, 50:200]
+            old_value = V[state]
+            action = actions[policy[state]]
+            next_state = get_next_state(state, action)
 
-plt.subplot(2, 3, 4)
-plt.imshow(cropped)
-plt.title("Cropped Image")
-plt.axis("off")
+            V[state] = reward + gamma * V[next_state]
+            delta = max(delta, abs(old_value - V[state]))
 
-# Rotate image
-rotated = cv2.rotate(img_rgb, cv2.ROTATE_90_CLOCKWISE)
+        if delta < theta:
+            break
 
-plt.subplot(2, 3, 5)
-plt.imshow(rotated)
-plt.title("Rotated Image")
-plt.axis("off")
+# Policy Improvement
+def policy_improvement():
+    policy_stable = True
 
-# Flip image horizontally
-flipped = cv2.flip(img_rgb, 1)
+    for state in range(states):
+        if state == 0 or state == states - 1:
+            continue
 
-plt.subplot(2, 3, 6)
-plt.imshow(flipped)
-plt.title("Flipped Image")
-plt.axis("off")
+        old_action = policy[state]
+        values = []
 
-plt.tight_layout()
-plt.show()
+        for action in actions:
+            next_state = get_next_state(state, action)
+            values.append(reward + gamma * V[next_state])
 
-# Apply Gaussian Blur
-blurred = cv2.GaussianBlur(img, (5, 5), 0)
+        policy[state] = np.argmax(values)
 
-# Apply edge detection
-edges = cv2.Canny(gray, 100, 200)
+        if old_action != policy[state]:
+            policy_stable = False
 
-# Display additional processing results
-plt.figure(figsize=(10, 4))
+    return policy_stable
 
-plt.subplot(1, 2, 1)
-plt.imshow(cv2.cvtColor(blurred, cv2.COLOR_BGR2RGB))
-plt.title("Gaussian Blur")
-plt.axis("off")
+# Policy Iteration
+iteration = 0
 
-plt.subplot(1, 2, 2)
-plt.imshow(edges, cmap='gray')
-plt.title("Edge Detection")
-plt.axis("off")
+while True:
+    iteration += 1
 
-plt.tight_layout()
-plt.show()
+    policy_evaluation()
 
-print("Image processing operations completed successfully.")
+    if policy_improvement():
+        break
+
+# Display results
+print("Policy Iteration Completed")
+print("\nOptimal Value Function:")
+print(V.reshape(rows, cols))
+
+print("\nOptimal Policy:")
+
+symbols = ['↑', '↓', '←', '→']
+
+for state in range(states):
+    if state == 0:
+        print('S', end='  ')
+    elif state == states - 1:
+        print('G', end='  ')
+    else:
+        print(symbols[policy[state]], end='  ')
+
+    if (state + 1) % cols == 0:
+        print()
+
+print("\nTotal Iterations:", iteration)

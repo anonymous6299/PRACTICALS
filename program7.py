@@ -1,60 +1,76 @@
-
-import cv2
-import numpy as np
+import tensorflow as tf
 import matplotlib.pyplot as plt
+import numpy as np
+from tensorflow.keras.datasets import mnist
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
 
-# Read input image
-img = cv2.imread("image.jpg")
+# Load MNIST dataset
+(X_train, y_train), (X_test, y_test) = mnist.load_data()
 
-if img is None:
-    print("Error: Image not found!")
-    exit()
+# Normalize images
+X_train = X_train / 255.0
+X_test = X_test / 255.0
 
-# Convert BGR to RGB
-img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+# Reshape images
+X_train = X_train.reshape(-1, 28, 28, 1)
+X_test = X_test.reshape(-1, 28, 28, 1)
 
-height, width = img.shape[:2]
+# Build CNN model
+model = Sequential([
+    Conv2D(32, (3, 3), activation='relu',
+           input_shape=(28, 28, 1)),
+    MaxPooling2D((2, 2)),
 
-# Define four points in the original image
-src_points = np.float32([
-    [50, 50],
-    [width - 50, 50],
-    [50, height - 50],
-    [width - 50, height - 50]
+    Conv2D(64, (3, 3), activation='relu'),
+    MaxPooling2D((2, 2)),
+
+    Flatten(),
+    Dense(128, activation='relu'),
+    Dense(10, activation='softmax')
 ])
 
-# Define destination points
-dst_points = np.float32([
-    [0, 0],
-    [width - 1, 0],
-    [100, height - 1],
-    [width - 100, height - 1]
-])
-
-# Calculate perspective transformation matrix
-M = cv2.getPerspectiveTransform(
-    src_points, dst_points
+# Compile model
+model.compile(
+    optimizer='adam',
+    loss='sparse_categorical_crossentropy',
+    metrics=['accuracy']
 )
 
-# Apply perspective transformation
-transformed = cv2.warpPerspective(
-    img, M, (width, height)
+# Display model architecture
+model.summary()
+
+# Train the model
+model.fit(
+    X_train, y_train,
+    epochs=5,
+    batch_size=64,
+    validation_split=0.1
 )
 
-# Display original and transformed images
-plt.figure(figsize=(10, 5))
+# Evaluate model
+loss, accuracy = model.evaluate(X_test, y_test)
 
-plt.subplot(1, 2, 1)
-plt.imshow(img)
-plt.title("Original Image")
-plt.axis("off")
+print("\nTest Accuracy:", accuracy * 100, "%")
+print("Test Loss:", loss)
 
-plt.subplot(1, 2, 2)
-plt.imshow(transformed)
-plt.title("Perspective Transformed Image")
-plt.axis("off")
+# Predict handwritten digits
+predictions = model.predict(X_test[:5])
+
+print("\nPredicted Labels:")
+print(np.argmax(predictions, axis=1))
+
+print("\nActual Labels:")
+print(y_test[:5])
+
+# Display sample images
+plt.figure(figsize=(10, 4))
+
+for i in range(5):
+    plt.subplot(1, 5, i + 1)
+    plt.imshow(X_test[i].reshape(28, 28), cmap='gray')
+    plt.title("Predicted: " + str(np.argmax(predictions[i])))
+    plt.axis('off')
 
 plt.tight_layout()
 plt.show()
-
-print("Perspective transformation completed successfully.")
