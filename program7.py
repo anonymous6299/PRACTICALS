@@ -1,4 +1,10 @@
+'''
+AIM=To perform Principal Component Analysis on datasets.
 
+REL. THEORY=
+Principal Component Analysis (PCA) is a dimensionality reduction technique that transforms correlated variables into a smaller set of uncorrelated variables called principal components. These components capture maximum possible variance in the data. PCA reduces complexity, removes redundancy, and supports visualization. Python's Scikit-learn library provides tools for implementing PCA on datasets.
+
+CODE=                                                                '''
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
@@ -21,3 +27,11 @@ print("\nExplained Variance Ratio:")
 print(pca.explained_variance_ratio_.round(3))
 print("\nTotal Variance Explained:")
 print(round(sum(pca.explained_variance_ratio_), 3))
+
+
+'''
+LO=
+1. Understand the concept and importance of Principal Component Analysis.
+2. Learn to reduce dataset dimensionality while retaining important information.
+3. Apply PCA using Python to simplify and visualize complex datasets.
+'''

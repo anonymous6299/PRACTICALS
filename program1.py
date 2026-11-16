@@ -1,3 +1,11 @@
+'''
+AIM=To perform various operations such as data storage, analysis and visualization.
+
+REL. THEORY=
+Data description involves understanding the structure, types, and characteristics of a dataset. Data viewing helps examine rows, columns, and individual values. Data manipulation includes selecting, filtering, sorting, modifying, and removing records. Python libraries such as Pandas provide useful functions for efficiently handling, organizing, and processing structured data.
+
+CODE=                                                                '''
+
 import pandas as pd
 data = {
     'Name': ['Amit', 'Neha', 'Raj', 'Priya', 'Karan'],
@@ -23,3 +31,10 @@ print(df)
 df = df[df['Age'] > 21]
 print("\nStudents Older Than 21:")
 print(df)
+
+'''
+LO=
+1. Understand the structure and characteristics of datasets.
+2. Learn to view, select, filter, and sort data using Python.
+3. Develop skills in manipulating and processing data using Pandas.
+'''

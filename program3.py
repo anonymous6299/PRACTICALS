@@ -1,3 +1,10 @@
+'''
+AIM=To perform chi square test on various data sets.
+
+REL. THEORY=
+The chi-square test is a statistical method used to determine whether a significant association exists between categorical variables or whether observed frequencies differ from expected frequencies. It compares observed and expected values using the chi-square statistic. Python's SciPy library provides functions to perform chi-square tests and calculate p-values for hypothesis testing.
+
+CODE=                                                                '''
 import numpy as np
 from scipy.stats import chisquare, chi2_contingency
 observed = np.array([20, 30, 25, 25])
@@ -24,3 +31,10 @@ if p_value < 0.05:
     print("Result: Variables are associated")
 else:
     print("Result: No significant association")
+
+'''
+LO=
+1. Understand the purpose and principles of the chi-square test.
+2. Learn to compare observed and expected frequencies.
+3. Develop skills in performing chi-square tests using Python.
+'''

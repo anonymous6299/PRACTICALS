@@ -1,4 +1,10 @@
+'''
+AIM=To perform linear regression on datasets.
 
+REL. THEORY=
+Linear regression is a supervised machine learning technique used to model the relationship between a dependent variable and one or more independent variables. It fits a linear equation to observed data and predicts numerical outcomes. Model performance can be evaluated using metrics such as R-squared and mean squared error. Python's Scikit-learn library supports implementation.
+
+CODE=                                                                '''
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
@@ -20,3 +26,9 @@ plt.ylabel('Y')
 plt.legend()
 plt.grid(True)
 plt.show()
+'''
+LO=
+1. Understand the concept of linear regression and its applications.
+2. Learn to establish relationships between dependent and independent variables.
+3. Develop skills in building and evaluating linear regression models using Python.
+'''

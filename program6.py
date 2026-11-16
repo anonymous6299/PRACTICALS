@@ -1,4 +1,10 @@
+'''
+AIM=To perform descriptive statistics analysis and data visualization.
 
+REL. THEORY=
+Descriptive statistics summarizes and describes the main characteristics of a dataset. Measures include mean, median, mode, range, variance, and standard deviation. Data visualization represents these characteristics through histograms, bar charts, box plots, and scatter plots. Python libraries such as Pandas, NumPy, and Matplotlib simplify statistical calculations and graphical representation.
+
+CODE=                                                                '''
 import pandas as pd
 import matplotlib.pyplot as plt
 data = {
@@ -36,3 +42,10 @@ plt.boxplot(df['Marks'])
 plt.title('Box Plot of Marks')
 plt.ylabel('Marks')
 plt.show()
+
+'''
+LO=
+1. Understand descriptive statistical measures such as mean, median, and mode.
+2. Learn to calculate variance, standard deviation, and other statistical measures.
+3. Represent statistical information using appropriate charts and graphs.
+'''

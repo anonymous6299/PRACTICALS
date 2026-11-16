@@ -1,4 +1,10 @@
+'''
+AIM=To perform various operations such as data storage, analysis and visualization.
 
+REL. THEORY=
+Data description involves understanding the structure, types, and characteristics of a dataset. Data viewing helps examine rows, columns, and individual values. Data manipulation includes selecting, filtering, sorting, modifying, and removing records. Python libraries such as Pandas provide useful functions for efficiently handling, organizing, and processing structured data.
+
+CODE=                                                                '''
 import pandas as pd
 import matplotlib.pyplot as plt
 data = {
@@ -30,3 +36,9 @@ plt.xlabel('Month')
 plt.ylabel('Profit')
 plt.grid(True)
 plt.show()
+'''
+LO=
+1. Understand different methods of data storage and management.
+2. Learn to analyze datasets and identify meaningful patterns.
+3. Develop skills in visualizing data using Python libraries.
+'''
