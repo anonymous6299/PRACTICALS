@@ -1,3 +1,10 @@
+'''
+AIM=Program to demonstrate PCA and LDA on Iris dataset 
+
+REL. THEORY=
+Principal Component Analysis (PCA) and Linear Discriminant Analysis (LDA) are dimensionality reduction techniques used in machine learning. PCA reduces features by preserving maximum variance, while LDA maximizes class separation. Both techniques can be applied to the Iris dataset to visualize and analyze flower species.
+
+CODE=                                                                '''
 import matplotlib.pyplot as plt
 from sklearn.datasets import load_iris
 from sklearn.preprocessing import StandardScaler
@@ -58,3 +65,10 @@ plt.legend()
 
 plt.tight_layout()
 plt.show()
+
+'''
+LO=
+1. Understand PCA and LDA techniques.
+2. Apply dimensionality reduction to the Iris dataset.
+3. Visualize and compare class separation using PCA and LDA.
+'''

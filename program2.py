@@ -1,3 +1,10 @@
+'''
+AIM=Program to demonstrate Simple Linear Regression 
+
+REL. THEORY=
+Simple Linear Regression is a supervised machine learning algorithm used to predict a dependent variable based on one independent variable. It establishes a linear relationship between two variables by fitting a best-fit straight line to the observed data using the least squares method.
+
+CODE=                                                                '''
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
@@ -34,3 +41,9 @@ plt.ylabel("Salary")
 plt.title("Simple Linear Regression")
 plt.legend()
 plt.show()
+'''
+LO=
+1. Understand the concept of Simple Linear Regression.
+2. Learn to train a regression model using Python.
+3. Predict values and evaluate the model's performance.
+'''

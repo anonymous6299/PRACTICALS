@@ -1,3 +1,10 @@
+'''
+AIM=Program to demonstrate K-Medoid clustering algorithm
+
+REL. THEORY=
+K-Medoids is an unsupervised machine learning algorithm used for clustering. It partitions data into K clusters by selecting actual data points as cluster centers (medoids). It assigns each point to its nearest medoid and minimizes the total distance within clusters.
+
+CODE=                                                                '''
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.datasets import load_iris
@@ -53,3 +60,10 @@ plt.ylabel("Sepal Width")
 plt.title("K-Medoids Clustering")
 plt.legend()
 plt.show()
+
+'''
+LO=
+1. Understand the working of the K-Medoids algorithm.
+2. Perform clustering using selected medoids.
+3. Analyze clusters and identify representative data points.
+'''

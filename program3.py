@@ -1,3 +1,10 @@
+'''
+AIM=Program to demonstrate Logistic Regression 
+
+REL. THEORY=
+Logistic Regression is a supervised machine learning algorithm used for classification problems. It predicts the probability of an outcome using the logistic (sigmoid) function and classifies data into categories, usually binary classes such as 0 and 1.
+
+CODE=                                                                '''
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
@@ -27,3 +34,11 @@ print("\nAccuracy:",
  accuracy_score(y_test, y_pred))
 print("\nConfusion Matrix:")
 print(confusion_matrix(y_test, y_pred))
+
+'''
+LO=
+1. Understand the concept of Logistic Regression.
+2. Implement a classification model using Python.
+3. Predict and evaluate categorical outcomes.
+
+'''

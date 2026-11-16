@@ -1,3 +1,10 @@
+'''
+AIM=Program to demonstrate DBSCAN clustering algorithm
+
+REL. THEORY=
+DBSCAN (Density-Based Spatial Clustering of Applications with Noise) is an unsupervised machine learning algorithm that groups data points based on their density. It identifies clusters of closely packed points and detects outliers or noise without requiring the number of clusters in advance.
+
+CODE=                                                                '''
 import matplotlib.pyplot as plt
 from sklearn.datasets import load_iris
 from sklearn.preprocessing import StandardScaler
@@ -28,3 +35,10 @@ plt.xlabel("Feature 1")
 plt.ylabel("Feature 2")
 plt.title("DBSCAN Clustering")
 plt.show()
+
+'''
+LO=
+1. Understand the working of the DBSCAN algorithm.
+2. Perform density-based clustering on datasets.
+3. Identify clusters and detect noise or outliers.
+'''

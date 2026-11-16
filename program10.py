@@ -1,3 +1,10 @@
+'''
+AIM=Program to demonstrate K-Means Clustering Algorithm on Handwritten Dataset
+
+REL. THEORY=
+K-Means is an unsupervised machine learning algorithm used to group similar data points into K clusters. It assigns each data point to the nearest centroid and repeatedly updates cluster centers. On a handwritten digits dataset, it groups similar digit images based on their pixel values.
+
+CODE=                                                                '''
 import matplotlib.pyplot as plt
 from sklearn.datasets import load_digits
 from sklearn.cluster import KMeans
@@ -35,3 +42,10 @@ plt.ylabel("Principal Component 2")
 plt.title("K-Means Clustering of Handwritten Digits")
 plt.colorbar(label="Cluster")
 plt.show()
+
+'''
+LO=
+1. Understand the working of the K-Means algorithm.
+2. Apply clustering to handwritten digit data.
+3. Analyze clusters based on similarities in digit patterns.
+'''

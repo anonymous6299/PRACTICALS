@@ -1,3 +1,10 @@
+'''
+AIM=Program to demonstrate Decision Tree – ID3 Algorithm 
+
+REL. THEORY=
+The ID3 (Iterative Dichotomiser 3) algorithm is a supervised machine learning algorithm used for classification. It constructs a decision tree by selecting the best attribute at each node using Information Gain, calculated from Entropy, to split the dataset into smaller subsets.
+
+CODE=                                                                '''
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
@@ -36,3 +43,10 @@ tree.plot_tree(
  filled=True
 )
 plt.show()
+
+'''
+LO=
+1. Understand the working of the ID3 algorithm.
+2. Learn Entropy and Information Gain.
+3. Build a decision tree for classification.
+'''
