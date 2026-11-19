@@ -1,4 +1,10 @@
+'''
+AIM= Implementation of Gradient descent.
 
+REL. TH.=Gradient Descent is an optimization algorithm used to find the minimum value of a function. It works by repeatedly updating a variable in the opposite direction of the function's gradient. The learning rate controls the size of each update. It is widely used in machine learning to minimize errors and improve model performance.
+
+CODE=
+'''
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -55,3 +61,9 @@ plt.xlabel("Iterations")
 plt.ylabel("Cost")
 plt.grid()
 plt.show()
+'''
+LO=
+1. Understand the working of gradient descent.
+2. Implement iterative parameter updates.
+3. Find the minimum value of a function.
+'''

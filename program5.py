@@ -1,4 +1,10 @@
+'''
+AIM= Implementation of basic Image Handling and processing operations on the image. 
 
+REL. TH.=Image processing involves performing operations on digital images to improve their quality or extract useful information. OpenCV is a popular Python library used for image reading, displaying, resizing, cropping and colour conversion. Various techniques such as rotation, flipping, blurring and edge detection help in analyzing image properties and preparing images for computer vision applications.
+
+CODE=
+'''
 import cv2
 import matplotlib.pyplot as plt
 
@@ -87,3 +93,9 @@ plt.tight_layout()
 plt.show()
 
 print("Image processing operations completed successfully.")
+'''
+LO=
+1. Perform basic image processing operations.
+2. Apply transformations and filtering techniques.
+3. Detect edges using the Canny method.
+'''

@@ -1,4 +1,10 @@
+'''
+AIM= Implementation of Geometric Transformation. 
 
+REL. TH.=Geometric transformations are operations used to change the position, orientation, size or shape of an image. Common transformations include translation, rotation, scaling, reflection and affine transformation. OpenCV provides functions such as getRotationMatrix2D() and warpAffine() to perform these operations. These techniques are useful in image alignment, correction and computer vision applications.
+
+CODE=
+'''
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
@@ -72,3 +78,9 @@ plt.tight_layout()
 plt.show()
 
 print("Geometric transformations completed successfully.")
+'''
+LO=
+1. Understand different geometric transformations.
+2. Apply rotation, scaling and translation.
+3. Perform affine transformations using OpenCV.
+'''

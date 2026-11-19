@@ -1,3 +1,10 @@
+'''
+AIM= Compute Fundamental Matrix. 
+
+REL. TH.=The Fundamental Matrix is an important concept in epipolar geometry that describes the relationship between corresponding points in two images of the same scene. It represents the geometric relationship between two camera views. Feature detection and matching techniques such as ORB help identify corresponding points. OpenCV provides findFundamentalMat() to estimate the matrix using matched feature points.
+
+CODE=
+'''
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
@@ -74,3 +81,9 @@ plt.axis("off")
 plt.show()
 
 print("\nFundamental Matrix computed successfully.")
+'''
+LO=
+1. Understand epipolar geometry and the Fundamental Matrix.
+2. Detect and match image features using ORB.
+3. Compute the Fundamental Matrix using OpenCV.
+'''

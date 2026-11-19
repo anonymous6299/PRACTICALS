@@ -1,3 +1,10 @@
+'''
+AIM= Implementation of Camera Calibration
+
+REL. TH.=Camera calibration is the process of determining the internal parameters and lens distortion of a camera. It helps estimate the camera matrix and distortion coefficients using multiple images of a known checkerboard pattern. OpenCV provides calibrateCamera() and undistort() functions for calibration and distortion correction. It is an important technique in 3D vision, image measurement and object tracking.
+
+CODE=
+'''
 import cv2
 import numpy as np
 import glob
@@ -102,3 +109,9 @@ plt.tight_layout()
 plt.show()
 
 print("\nCamera calibration completed successfully.")
+'''
+LO=
+1. Understand the concept of camera calibration.
+2. Calculate camera matrix and distortion coefficients.
+3. Correct image distortion using OpenCV.
+'''

@@ -1,4 +1,10 @@
+'''
+AIM=Implementation of Linear Regression using Gradient descent. 
 
+REL. TH.=Linear Regression is a supervised machine learning algorithm used to establish a relationship between independent and dependent variables. It represents this relationship using a straight-line equation. Gradient descent is used to optimize the model parameters by minimizing the mean squared error. The trained model can predict continuous numerical values from input data.
+
+CODE=
+'''
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -49,3 +55,9 @@ plt.ylabel("Y Values")
 plt.legend()
 plt.grid()
 plt.show()
+'''
+LO=
+1. Understand the concept of linear regression.
+2. Implement gradient descent for model training.
+3. Predict continuous values using a trained model.
+'''

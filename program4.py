@@ -1,4 +1,10 @@
+'''
+AIM= Comparison of classification accuracy of SVM and CNN for the dataset. 
 
+REL. TH.=Support Vector Machine (SVM) and Convolutional Neural Network (CNN) are machine learning techniques used for classification tasks. SVM identifies an optimal decision boundary between different classes, while CNN extracts important features using convolution and pooling layers. Both techniques can classify handwritten digits. Their performance can be compared using classification accuracy on the same dataset.
+
+CODE=
+'''
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -94,3 +100,9 @@ for i, value in enumerate(accuracies):
 
 plt.grid(axis='y')
 plt.show()
+'''
+LO=
+1. Understand SVM and CNN classification.
+2. Implement handwritten digit recognition.
+3. Compare model performance using accuracy.
+'''

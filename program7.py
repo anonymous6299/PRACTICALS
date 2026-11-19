@@ -1,4 +1,10 @@
+'''
+AIM= Implementation of Perspective Transformation. 
 
+REL. TH.=Perspective transformation is an image processing technique used to change the viewpoint of an image. It helps convert a perspective view into a desired view by mapping four corresponding points from the source image to the destination image. OpenCV provides getPerspectiveTransform() and warpPerspective() functions to perform this operation. It is commonly used in document scanning and image correction.
+
+CODE=
+'''
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
@@ -58,3 +64,9 @@ plt.tight_layout()
 plt.show()
 
 print("Perspective transformation completed successfully.")
+'''
+LO=
+1. Understand perspective transformation.
+2. Identify corresponding points in an image.
+3. Apply perspective correction using OpenCV.
+'''
